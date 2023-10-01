@@ -2,17 +2,16 @@ const modal = () => {
   const modal = document.querySelector(".popup");
   const buttons = document.querySelectorAll(".popup-btn");
   const closeBtn = modal.querySelector(".popup-close");
-  const clientWidht = document.documentElement.clientWidth;
+  const clientWidth = document.documentElement.clientWidth;
 
   let idInterval;
 
   const opacityModal = () => {
-    console.log(clientWidht);
     let opacity = Number(modal.style.opacity);
 
     idInterval = requestAnimationFrame(opacityModal);
 
-    if (opacity < 1 && clientWidht >= 768) {
+    if (opacity < 1 && clientWidth >= 768) {
       opacity += 0.007;
       modal.style.opacity = String(opacity);
     } else {
