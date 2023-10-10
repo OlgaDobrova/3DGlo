@@ -7,10 +7,15 @@ const calculator = (price = 100) => {
   const calcDay = calcBlock.querySelector(".calc-day");
   const total = document.getElementById("total");
 
+  const randomNumber = (num) => {
+    total.textContent = Math.round(Math.random() * num);
+  };
+
   const countCalc = () => {
     const calcTypeValue = +calcType.options[calcType.selectedIndex].value;
     const calcSquareValue = calcSquare.value;
 
+    let interval;
     let totalValue = 0;
     let calcCountValue = 1;
     let calcDayValue = 1;
@@ -30,7 +35,13 @@ const calculator = (price = 100) => {
         price * calcTypeValue * calcSquareValue * calcCountValue * calcDayValue;
     }
 
-    total.textContent = totalValue;
+    if (totalValue != 0) {
+      interval = setInterval(randomNumber, 100, totalValue);
+      setTimeout(() => {
+        clearInterval(interval);
+        total.textContent = totalValue;
+      }, 1000);
+    }
   };
 
   items.forEach((item) => {
@@ -39,7 +50,7 @@ const calculator = (price = 100) => {
     });
   });
 
-  calcBlock.addEventListener("input", (e) => {
+  calcBlock.addEventListener("change", (e) => {
     if (
       e.target == calcType ||
       e.target == calcSquare ||
